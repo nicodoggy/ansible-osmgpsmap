@@ -1,0 +1,23 @@
+---
+APP_PYTHON: "{{ '/usr/bin/python' if lookup('file', '/usr/bin/python', errors='ignore') else '/usr/bin/python3' }}"
+APP_DEPENDENCIES_REDHAT:
+  - git
+  - libsoup-devel
+  - gtk3-devel
+  - gtk4-devel
+  - cairo-devel
+  - gobject-introspection-devel
+APP_DEPENDENCIES: "{{ APP_DEPENDENCIES_REDHAT if ansible_distribution_file_variety == 'RedHat' else APP_DEPENDENCIES_REDHAT }}"
+APP_NAME: osmgpsmap
+APP_DISPLAY_NAME: osmgpsmap
+APP_GENERIC_NAME: osmgpsmap
+APP_COMMENT: osmgpsmap
+APP_USER: "{{ lookup('env', 'USER') }}"
+APP_GROUP: "{{ APP_USER }}"
+APP_PREFIX: "{{ lookup('env', 'HOME') }}/.local"
+APP_SRC: "{{ APP_PREFIX }}/src/{{ APP_NAME  }}"
+APP_SHARE: "{{ APP_PREFIX }}/share/{{ APP_NAME  }}"
+APP_REPO: https://github.com/nzjrs/osm-gps-map.git
+APP_TAG: 1.2.0
+APP_README: "{{ APP_SRC }}/README"
+
